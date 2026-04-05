@@ -58,9 +58,9 @@
           <span class="quick-icon">📞</span>
           <span class="quick-text">Kịch bản<br>gọi điện</span>
         </div>
-        <div class="quick-card" onclick="showPage('care');openAccordion('zalo-checkin')">
-          <span class="quick-icon">💬</span>
-          <span class="quick-text">Tin nhắn<br>chăm sóc</span>
+        <div class="quick-card" onclick="showPage('rates')">
+          <span class="quick-icon">💰</span>
+          <span class="quick-text">Bảng<br>lãi suất</span>
         </div>
         <div class="quick-card" onclick="showPage('sales');openAccordion('objection')">
           <span class="quick-icon">🛡️</span>
@@ -74,9 +74,9 @@
           <span class="quick-icon">🤝</span>
           <span class="quick-text">Xin<br>Referral</span>
         </div>
-        <div class="quick-card" onclick="showPage('tools')">
-          <span class="quick-icon">🤖</span>
-          <span class="quick-text">Hỏi<br>AI</span>
+        <div class="quick-card" style="border-color: rgba(62,207,142,0.5);" onclick="showPage('report')">
+          <span class="quick-icon">🚀</span>
+          <span class="quick-text" style="color:var(--green)">Báo cáo<br>cuối ngày</span>
         </div>
       </div>
 
@@ -221,6 +221,80 @@
             <div class="pipe-step done"><span class="pipe-num">7</span><span class="pipe-name">Giải ngân</span><span class="pipe-rate">4 khoản</span></div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- RATES PAGE -->
+    <div class="page" id="page-rates">
+      <h2 class="page-title">💰 Sản Phẩm & Lãi Suất</h2>
+      <p class="page-desc">Bảng tra cứu so sánh nhanh (Cập nhật 06/2026)</p>
+      
+      <div class="accordion" id="rate-house">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <div class="acc-left"><span class="acc-icon">🏠</span><span>Vay Mua Nhà BĐS</span></div>
+          <span class="acc-arrow">›</span>
+        </div>
+        <div class="acc-body">
+          <table class="info-table">
+            <tr><th>NH</th><th>Lãi 1 năm</th><th>Phí phạt</th></tr>
+            <tr><td><b style="color:var(--blue)">VIB</b></td><td><b>7.5%</b></td><td>1% (năm 3)</td></tr>
+            <tr><td>TCB</td><td>7.0%</td><td>2%</td></tr>
+            <tr><td>MB</td><td>7.2%</td><td>1.5%</td></tr>
+          </table>
+        </div>
+      </div>
+      
+      <div class="accordion" id="rate-car">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <div class="acc-left"><span class="acc-icon">🚗</span><span>Vay Ô tô</span></div>
+          <span class="acc-arrow">›</span>
+        </div>
+        <div class="acc-body">
+          <table class="info-table">
+             <tr><th>NH</th><th>Lãi 1 năm</th><th>Tài trợ</th></tr>
+            <tr><td><b style="color:var(--blue)">VIB</b></td><td><b>8.5%</b></td><td>80%</td></tr>
+            <tr><td>Shinhan</td><td>8.0%</td><td>70%</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="accordion" id="rate-biz">
+        <div class="acc-header" onclick="toggleAcc(this)">
+          <div class="acc-left"><span class="acc-icon">🏭</span><span>Vay Sản Xuất Kinh Doanh</span></div>
+          <span class="acc-arrow">›</span>
+        </div>
+        <div class="acc-body">
+          <table class="info-table">
+            <tr><th>Gói</th><th>Lãi suất</th><th>ĐK</th></tr>
+            <tr><td>SME Khách Mới</td><td>6.5%</td><td>Dthu >10 tỷ</td></tr>
+            <tr><td>KH Hiện Hữu</td><td>7.0%</td><td>Duy trì</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORT PAGE -->
+    <div class="page" id="page-report">
+      <h2 class="page-title">🚀 Báo Cáo Tracking</h2>
+      <p class="page-desc">Gửi báo cáo cuối ngày đồng bộ lên Google Sheets Leader</p>
+      
+      <div class="ai-card">
+        <label style="font-size:12px;color:var(--dim)">Tên đại diện RM</label>
+        <input type="text" id="rm-name" class="ai-input" style="min-height:40px;margin-top:4px;margin-bottom:14px" placeholder="Ví dụ: Nguyễn Văn A">
+        
+        <label style="font-size:12px;color:var(--dim)">Thống kê trong ngày</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;margin-bottom:10px">
+          <input type="number" id="rm-call-input" class="ai-input" style="min-height:40px" placeholder="📞 Số cuộc gọi mới">
+          <input type="number" id="rm-meet-input" class="ai-input" style="min-height:40px" placeholder="🤝 Số cuộc hẹn">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+          <input type="number" id="rm-file-input" class="ai-input" style="min-height:40px" placeholder="📄 Số hồ sơ chốt">
+          <input type="number" id="rm-disburse" class="ai-input" style="min-height:40px" placeholder="💰 Giải ngân (tr)">
+        </div>
+        
+        <label style="font-size:12px;color:var(--dim)">Ghi chú báo cáo / Hỗ trợ từ Leader</label>
+        <textarea id="rm-notes" class="ai-input" style="margin-top:4px" placeholder="Ví dụ: Cần sếp hỗ trợ deal chị B vì vấn đề hạn mức..."></textarea>
+        
+        <button class="ai-btn" id="btn-submit-report" onclick="submitReport()" style="background:linear-gradient(135deg,var(--green),#1a8a5a);color:#000;box-shadow:0 4px 10px rgba(62,207,142,.3);">📤 GỬI BÁO CÁO CHO LEADER</button>
       </div>
     </div>
 
@@ -443,36 +517,27 @@ Có tin vui em báo ạ 😊</div>
     </div>
 
     <!-- AI TOOLS PAGE -->
-    <div class="page" id="page-tools">
-      <h2 class="page-title">⚡ AI Tools</h2>
-      <p class="page-desc">Chọn tình huống → Điền thông tin → Mở Claude.ai</p>
+    <div class="page" id="page-tools" style="display: flex; flex-direction: column; height: calc(100vh - 140px);">
+      <h2 class="page-title">⚡ Trợ Lý Cố Vấn (Gemini AI)</h2>
+      <p class="page-desc" style="margin-bottom:8px">Hỗ trợ RM phân tích, viết Zalo, kỹ năng chốt sale</p>
 
-      <div class="ai-card">
-        <div class="ai-title">🎯 Chuẩn bị gặp khách</div>
-        <textarea class="ai-input" id="ai-meet" placeholder="VD: KH Nguyễn Văn A, DN sản xuất bao bì, cần vay 3 tỷ VLĐ, lo ngại lãi suất cao">
-        </textarea>
-        <button class="ai-btn" onclick="openAI('meet')">🤖 Tạo kịch bản với AI</button>
+      <div class="chat-container" id="chat-container">
+        <div class="chat-message bot">
+          <div class="msg-bubble">Xin chào! Trợ lý AI VIB đây ạ 🤖. Anh/chị cần em hỗ trợ:<br><br>• Xử lý khách chê lãi cao?<br>• Viết tin nhắn xin referral?<br>• Lên phương án gọi điện?<br><br>Gõ câu hỏi xuống dưới nhé!</div>
+        </div>
       </div>
 
-      <div class="ai-card">
-        <div class="ai-title">🛡️ Xử lý từ chối khó</div>
-        <textarea class="ai-input" id="ai-obj" placeholder='VD: KH nói "bên Techcombank cho lãi 7%, sao VIB 8%?"'>
-        </textarea>
-        <button class="ai-btn" onclick="openAI('obj')">🤖 Tìm cách phản hồi</button>
-      </div>
-
-      <div class="ai-card">
-        <div class="ai-title">🏠 Giữ chân KH tất toán</div>
-        <textarea class="ai-input" id="ai-retain" placeholder="VD: KH Trần Thị B, dư nợ 2 tỷ, lãi 7.5%, muốn bán nhà mua căn khác lớn hơn">
-        </textarea>
-        <button class="ai-btn" onclick="openAI('retain')">🤖 Tạo kịch bản giữ chân</button>
-      </div>
-
-      <div class="ai-card">
-        <div class="ai-title">📊 Phân tích KPI tháng</div>
-        <textarea class="ai-input" id="ai-kpi" placeholder="VD: Giải ngân 2 tỷ/5 tỷ target, 30 cuộc gọi/tuần, 3 hẹn, 1 hồ sơ nộp">
-        </textarea>
-        <button class="ai-btn" onclick="openAI('kpi')">🤖 Phân tích & đề xuất</button>
+      <div class="chat-input-area">
+        <div class="chat-suggestions">
+          <button class="chat-sugg" onclick="prefillChat('Cách xử lý khách hàng chê lãi VIB cao hơn ngân hàng T')">Xử lý chê lãi</button>
+          <button class="chat-sugg" onclick="prefillChat('Viết 1 kịch bản Zalo xin 15 phút gặp Giám đốc DN Bao Bì')">Xin hẹn Giám đốc</button>
+        </div>
+        <div style="display:flex; gap:8px">
+          <textarea id="ai-chat-input" class="ai-input" style="min-height:44px; padding:10px 14px; margin:0;" placeholder="Nhập câu hỏi..."></textarea>
+          <button class="ai-btn" onclick="sendGemini()" style="margin:0; width:60px; display:flex; align-items:center; justify-content:center; padding:0" id="send-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+        </div>
       </div>
     </div>
 

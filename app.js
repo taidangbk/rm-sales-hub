@@ -166,58 +166,158 @@ function toggleCheck(id, checked) {
 
 renderChecklist();
 
-// ========== AI TOOLS ==========
-const prompts = {
-  meet: (input) => `Tôi là RM tín dụng VIB. Hôm nay tôi có cuộc hẹn:
-${input}
+// ========== GEMINI AI CHAT ==========
+const GEMINI_API_KEY = "AIzaSyAH1Qjudz2vWaGaYe1BO8N2mTvbOaca1I0";
 
-Tạo giúp tôi:
-1. 3 câu hỏi SPIN phù hợp
-2. 2 selling point mạnh nhất
-3. Cách xử lý từ chối có thể gặp
-Ngắn gọn, dưới 200 từ.`,
+let chatHistory = [
+  {
+    "role": "model",
+    "parts": [{ "text": "Bạn là Trợ lý AI của Ngân hàng VIB, chuyên hỗ trợ các bạn RM tín dụng (Relationship Manager). Nhiệm vụ của bạn là tư vấn kịch bản gọi điện, kịch bản Zalo, cách xử lý từ chối và xin referral. KHÔNG tạo thông tin giả về chính sách. Luôn trả lời ngắn gọn, thực dụng, đúng phong cách sale ngân hàng. Trả về định dạng markdown." }]
+  }
+];
 
-  obj: (input) => `Khách hàng từ chối: "${input}"
+function prefillChat(text) {
+  const input = document.getElementById('ai-chat-input');
+  input.value = text;
+  input.focus();
+}
 
-Tôi là RM tín dụng VIB. Phân tích:
-1. Đây là từ chối thật hay trì hoãn?
-2. Viết 3 cách phản hồi (soft → strong)
-3. Câu chốt sau khi xử lý
-Ngắn gọn, thực tế.`,
+async function sendGemini() {
+  const inputEl = document.getElementById('ai-chat-input');
+  const text = inputEl.value.trim();
+  if (!text) return;
+  
+  inputEl.value = '';
+  addMsgToChat(text, 'user');
+  
+  const loadingId = addLoading();
+  
+  try {
+    // Xây dựng message history 
+    const messages = chatHistory.map(h => ({
+       role: h.role === 'model' ? 'model' : 'user',
+       parts: [{ text: h.parts[0].text }]
+    }));
+    messages.push({ role: "user", parts: [{ text }] });
+    
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: messages })
+    });
+    
+    const data = await res.json();
+    document.getElementById(loadingId).remove();
+    
+    if (data.error) {
+      addMsgToChat('Lỗi từ Google: ' + data.error.message, 'bot');
+      return;
+    }
+    
+    const replyText = data.candidates[0].content.parts[0].text;
+    
+    chatHistory.push({ role: "user", parts: [{ text }] });
+    chatHistory.push({ role: "model", parts: [{ text: replyText }] });
+    
+    addMsgToChat(replyText, 'bot');
+    
+  } catch (err) {
+    document.getElementById(loadingId).remove();
+    addMsgToChat('Mất kết nối mạng hoặc lỗi hệ thống.', 'bot');
+  }
+}
 
-  retain: (input) => `Tôi là RM tín dụng VIB. Khách muốn tất toán:
-${input}
+function parseMarkdown(text) {
+  let html = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  html = html.replace(/\n\n/g, '<br><br>');
+  html = html.replace(/\n/g, '<br>');
+  html = html.replace(/• (.*?)<br>/g, '<ul><li style="margin-left:14px">$1</li></ul>');
+  html = html.replace(/- (.*?)<br>/g, '<ul><li style="margin-left:14px">$1</li></ul>');
+  return html;
+}
 
-Tạo kịch bản giữ chân theo SAVE:
-1. Câu hỏi khám phá (bán để làm gì? mua lại không? người mua ai?)
-2. Phương án thay thế tất toán
-3. Cross-sell nếu không giữ được
-4. Cách xin referral người mua
-Ngắn gọn, copy-paste vào Zalo được.`,
+function addMsgToChat(text, sender) {
+  const container = document.getElementById('chat-container');
+  const div = document.createElement('div');
+  div.className = `chat-message ${sender}`;
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = sender === 'bot' ? parseMarkdown(text) : text;
+  div.appendChild(bubble);
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
 
-  kpi: (input) => `Tôi là RM tín dụng VIB. Số liệu tháng này:
-${input}
+function addLoading() {
+  const container = document.getElementById('chat-container');
+  const div = document.createElement('div');
+  div.className = `chat-message bot`;
+  const id = 'loading-' + Date.now();
+  div.id = id;
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble ai-loading';
+  bubble.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  div.appendChild(bubble);
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+  return id;
+}
 
-Phân tích:
-1. Đang đi đúng hướng hay lệch?
-2. Bước nào trong pipeline đang yếu?
-3. Top 3 hành động cải thiện ngay
-4. Target tuần tới cụ thể
-Ngắn gọn, actionable.`
-};
+// ========== REPORT SUBMIT (GOOGLE SHEETS) ==========
+setTimeout(() => {
+  const savedName = localStorage.getItem('rm_name') || '';
+  if(document.getElementById('rm-name')) document.getElementById('rm-name').value = savedName;
+}, 500);
 
-function openAI(type) {
-  const input = document.getElementById('ai-' + type).value.trim();
-  if (!input) {
-    showToast('⚠️ Nhập thông tin trước!');
+function submitReport() {
+  const name = document.getElementById('rm-name').value.trim();
+  const calls = document.getElementById('rm-call-input').value;
+  const meets = document.getElementById('rm-meet-input').value;
+  const files = document.getElementById('rm-file-input').value;
+  const disburse = document.getElementById('rm-disburse').value;
+  const notes = document.getElementById('rm-notes').value;
+  
+  if(!name) { showToast('⚠️ Nhập tên RM!'); return; }
+  
+  localStorage.setItem('rm_name', name);
+  const btn = document.getElementById('btn-submit-report');
+  btn.textContent = '⏳ Đang gửi...';
+  btn.disabled = true;
+  
+  const payload = {
+    date: new Date().toLocaleDateString('vi-VN') + ' ' + new Date().toLocaleTimeString('vi-VN'),
+    name: name,
+    calls: calls || 0,
+    meets: meets || 0, 
+    files: files || 0,
+    disburse: disburse || 0,
+    notes: notes || "Không có"
+  };
+  
+  // Link Google Sheets Webhook của Leader
+  const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbxY1_CLkxzVmAbi_3YJEv_OW3WhPtPfVIlX4Y1rF3BwUScTJnWCpSHV_Z9KaAaAS5kvxQ/exec"; 
+  
+  if (!WEBHOOK_URL) {
+    setTimeout(() => {
+      btn.textContent = '✅ Đã lưu nháp cục bộ';
+      btn.disabled = false;
+      showToast('⚠️ Chưa cài đặt Google Sheets. App đã lưu tạm.');
+    }, 1500);
     return;
   }
-  const prompt = prompts[type](input);
-  navigator.clipboard.writeText(prompt).then(() => {
-    showToast('Đã copy prompt! Mở Claude.ai →');
-    setTimeout(() => {
-      window.open('https://claude.ai/new', '_blank');
-    }, 800);
+  
+  fetch(WEBHOOK_URL, {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(() => {
+    btn.textContent = '🚀 Đã gửi Report!';
+    showToast('Báo cáo đã lên hệ thống Leader!');
+    setTimeout(() => { btn.innerHTML = '📤 GỬI BÁO CÁO CHO LEADER'; btn.disabled = false; }, 3000);
+  }).catch(() => {
+    btn.textContent = '❌ Lỗi mạng';
+    btn.disabled = false;
   });
 }
 
