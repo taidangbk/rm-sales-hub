@@ -167,7 +167,7 @@ function toggleCheck(id, checked) {
 renderChecklist();
 
 // ========== GEMINI AI CHAT ==========
-const GEMINI_API_KEY = "AIzaSyAH1Qjudz2vWaGaYe1BO8N2mTvbOaca1I0";
+const GEMINI_API_KEY = "AIzaSyDa8ZlSkKq_6_Utkg--LNLmtl8xYl1ej_U";
 
 let chatHistory = [
   {
