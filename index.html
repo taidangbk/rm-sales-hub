@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#020617">
-<title>VIB Sales Hub – Gen Z Cyber Edition</title>
+<meta name="theme-color" content="#004f98">
+<title>VIB Sales Hub – Professional Edition</title>
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -15,11 +15,11 @@
 
 <!-- IDENTITY SETUP MODAL (Zero-Login) -->
 <div id="identity-modal" class="modal-overlay" style="display:flex;">
-  <div class="modal-content glass">
-    <h2 style="font-size:24px; font-weight:900; margin-bottom:8px; background:var(--grad-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Nhận diện RM/Hub</h2>
-    <p style="font-size:13px; color:var(--text-dim); margin-bottom:20px;">Chào mừng bạn! Hãy thiết lập danh tính một lần duy nhất để bắt đầu đua Top.</p>
+  <div class="modal-content">
+    <h2 style="font-size:24px; font-weight:900; margin-bottom:8px; color:var(--vib-blue);">Nhận diện nhân sự</h2>
+    <p style="font-size:13px; color:var(--text-dim); margin-bottom:20px;">Chào mừng bạn! Thiết lập danh tính để bắt đầu làm việc.</p>
     
-    <label style="font-size:11px; font-weight:700; color:var(--neon-blue); text-transform:uppercase;">Quản lý trực tiếp (SM)</label>
+    <label style="font-size:11px; font-weight:700; color:var(--vib-blue); text-transform:uppercase;">Quản lý trực tiếp (SM)</label>
     <select id="setup-sm" class="ai-input" style="margin:8px 0 16px;" onchange="updateSetupRMList(this.value)">
       <option value="">-- Chọn SM --</option>
       <option value="Hoa Lý">SM Hoa Lý</option>
@@ -28,14 +28,14 @@
     </select>
 
     <div id="rm-select-area">
-      <label style="font-size:11px; font-weight:700; color:var(--neon-blue); text-transform:uppercase;">Tên của bạn</label>
+      <label style="font-size:11px; font-weight:700; color:var(--vib-blue); text-transform:uppercase;">Tên của bạn</label>
       <select id="setup-rm" class="ai-input" style="margin:8px 0 16px;">
         <option value="">-- Chọn Tên --</option>
       </select>
     </div>
     
     <div id="ctv-area" style="display:none;">
-      <label style="font-size:11px; font-weight:700; color:var(--neon-purple); text-transform:uppercase;">Họ tên Member / CTV Mới</label>
+      <label style="font-size:11px; font-weight:700; color:var(--vib-blue); text-transform:uppercase;">Họ tên Member / CTV Mới</label>
       <input type="text" id="setup-ctv-name" class="ai-input" style="margin:8px 0 16px;" placeholder="Nhập họ tên đầy đủ...">
     </div>
 
@@ -50,7 +50,7 @@
       <div class="logo">VIB</div>
       <div>
         <div class="header-title">Sales Hub</div>
-        <div class="header-sub" id="user-display">Cyber Edition</div>
+        <div class="header-sub" id="user-display">Professional Edition</div>
       </div>
     </div>
     <div class="header-time" id="clock">00:00:00</div>
@@ -72,7 +72,7 @@
       </div>
       
       <!-- PERSONAL STATS -->
-      <div class="card glass" style="padding:16px; border-color:rgba(14, 165, 233, 0.2);">
+      <div class="card" style="padding:16px; border-left: 4px solid var(--vib-blue);">
         <div style="display:flex; justify-content:space-between; align-items:center;">
           <div>
             <div style="font-size:10px; font-weight:800; color:var(--text-dim); text-transform:uppercase;">Túi Hồ Sơ (Pipeline)</div>
@@ -80,7 +80,7 @@
           </div>
           <div style="text-align:right;">
             <div style="font-size:10px; font-weight:800; color:var(--text-dim); text-transform:uppercase;">Cần xử lý</div>
-            <div style="font-size:18px; font-weight:900; color:var(--neon-purple);"><span id="personal-tasks">0</span> Hồ sơ</div>
+            <div style="font-size:18px; font-weight:900; color:var(--vib-orange);"><span id="personal-tasks">0</span> Hồ sơ</div>
           </div>
         </div>
       </div>
@@ -99,16 +99,16 @@
           <span class="quick-icon">🏠</span><span class="quick-text">Giữ chân<br>tất toán</span>
         </div>
         <div class="quick-card" onclick="showPage('roadmap')">
-          <span class="quick-icon">📅</span><span class="quick-text" style="color:var(--neon-orange)">Marketing<br>90 ngày</span>
+          <span class="quick-icon">📅</span><span class="quick-text" style="color:var(--vib-orange)">Marketing<br>90 ngày</span>
         </div>
-        <div class="quick-card" onclick="showPage('report')" style="background:rgba(34, 197, 94, 0.1); border-color:var(--neon-green);">
-          <span class="quick-icon">🚀</span><span class="quick-text" style="color:var(--neon-green)">Báo cáo<br>cuối ngày</span>
+        <div class="quick-card" onclick="showPage('report')" style="border-color:var(--vib-blue);">
+          <span class="quick-icon">📊</span><span class="quick-text" style="color:var(--vib-blue)">Báo cáo<br>công việc</span>
         </div>
       </div>
 
       <div class="stats-row">
         <div class="stat-bubble">
-          <div class="stat-num glow-text" id="stat-calls">0</div>
+          <div class="stat-num" id="stat-calls">0</div>
           <div class="stat-label">Cuộc gọi</div>
           <button class="ai-btn" style="padding:4px 12px; font-size:11px; margin-top:8px; width:100%" onclick="incrementStat('calls')">+1</button>
         </div>
@@ -129,8 +129,8 @@
         </div>
       </div>
       
-      <div class="card glass">
-        <div style="font-weight:900; font-size:15px; margin-bottom:12px; color:var(--text-bright);">📋 Checklist công việc hôm nay</div>
+      <div class="card">
+        <div style="font-weight:900; font-size:15px; margin-bottom:12px; color:var(--vib-blue);">📋 Checklist công việc hôm nay</div>
         <div id="checklist-daily">
           <!-- Dynamic checklist injected by JS -->
         </div>
@@ -184,7 +184,7 @@
         <div class="acc-body" id="objection-list">
           <!-- Objections injected via JS/HTML -->
           <div class="card glass" style="padding:12px; margin-bottom:8px;" onclick="this.classList.toggle('open')">
-            <div style="color:var(--neon-red); font-weight:800; font-size:13px;">❌ "Lãi suất cao quá"</div>
+            <div style="color:var(--danger); font-weight:800; font-size:13px;">❌ "Lãi suất cao quá"</div>
             <div style="display:none; font-size:12px; color:var(--text); margin-top:8px; border-top:1px solid var(--border); padding-top:8px;" class="obj-a">
                ✅ "Em hiểu ạ. Hiện tại bên em biên độ cố định 3.0%, các bank khác headline thấp nhưng biên độ thả nổi cao hơn. Anh chị tính tổng chi phí 5 năm sẽ thấy VIB rẻ hơn đấy ạ."
             </div>
@@ -212,7 +212,7 @@
             <div style="color:var(--text-dim);font-size:11px">↓ 80%</div>
             <div class="pipe-step"><div class="pipe-num">6</div><div class="pipe-text"><span>Phê duyệt</span><b>4 duyệt</b></div></div>
             <div style="color:var(--text-dim);font-size:11px">↓</div>
-            <div class="pipe-step" style="border-color:var(--neon-green)"><div class="pipe-num" style="background:var(--neon-green)">7</div><div class="pipe-text" style="color:var(--neon-green)"><span>Giải ngân</span><b>4 khoản</b></div></div>
+            <div class="pipe-step" style="border-color:var(--success)"><div class="pipe-num" style="background:var(--success)">7</div><div class="pipe-text" style="color:var(--success)"><span>Giải ngân</span><b>4 khoản</b></div></div>
           </div>
         </div>
       </div>
@@ -225,7 +225,7 @@
         <p class="page-desc">Số liệu cập nhật & Máy tính dòng tiền thông minh.</p>
       </div>
       
-      <div class="tab-pills glass" style="margin-bottom:16px; padding:6px; border-radius:24px;">
+      <div class="tab-pills" style="margin-bottom:16px;">
         <button class="pill active" onclick="showRateTab(this,'tab-rates-list')">🏦 Báo Giá Các Bank</button>
         <button class="pill" onclick="showRateTab(this,'tab-rates-calc')">🧮 Máy Tính Khoản Vay</button>
       </div>
@@ -233,7 +233,7 @@
       <div class="rate-tab active" id="tab-rates-list">
         <div class="card glass" style="padding:12px; margin-bottom:12px;">
            <div style="display:flex; justify-content:space-between; align-items:center;">
-             <span id="rate-sync-status" style="font-size:11px; font-weight:bold; color:var(--neon-green);">Đã đồng bộ từ Sheets ✅</span>
+             <span id="rate-sync-status" style="font-size:11px; font-weight:bold; color:var(--success);">Đã đồng bộ từ hệ thống ✅</span>
              <button class="ai-btn" style="padding:6px; font-size:12px;" onclick="fetchRates()">🔄 Update</button>
            </div>
         </div>
@@ -303,7 +303,7 @@
           <button class="ai-btn" style="width:100%;" onclick="calculateLoan()">🧮 TÍNH DÒNG TIỀN CHI TIẾT</button>
         </div>
 
-        <div id="calc-results" class="card glass" style="display:none; border-color:var(--neon-blue);">
+        <div id="calc-results" class="card" style="display:none; border-color:var(--vib-blue);">
           <h3 style="font-size:16px; font-weight:900; color:var(--neon-blue); text-align:center; margin-bottom:16px;">Kết Quả Phân Tích</h3>
           <div style="display:grid; gap:12px;">
             <div style="display:flex; justify-content:space-between; padding-bottom:10px; border-bottom:1px solid var(--border);">
@@ -312,11 +312,11 @@
             </div>
             <div style="display:flex; justify-content:space-between; padding-bottom:10px; border-bottom:1px solid var(--border);">
               <span style="font-size:13px; color:var(--text-dim);">Lãi tháng 1:</span>
-              <b id="res-interest-m1" style="color:var(--neon-red);">0 ₫</b>
+              <b id="res-interest-m1" style="color:var(--danger);">0 ₫</b>
             </div>
             <div style="display:flex; justify-content:space-between; background:rgba(34, 197, 94, 0.1); padding:10px; border-radius:10px;">
               <span style="font-size:13px; font-weight:800;">Tổng trả tháng 1:</span>
-              <b id="res-total-m1" style="color:var(--neon-green); font-size:15px;">0 ₫</b>
+              <b id="res-total-m1" style="color:var(--success); font-size:15px;">0 ₫</b>
             </div>
             <div style="display:flex; justify-content:space-between;">
               <span id="res-float-label" style="font-size:11px; color:var(--text-dim);">Tháng thả nổi (37):</span>
@@ -341,7 +341,7 @@
         <button class="pill" style="padding:4px 10px; background:var(--surface);" onclick="checkMasterAuth()">ADMIN 🔐</button>
       </div>
 
-      <div class="card glass">
+      <div class="card">
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
           <div>
             <label style="font-size:10px; font-weight:800; color:var(--text-dim);">QUẢN LÝ (SM)</label>
@@ -377,7 +377,7 @@
           </div>
         </div>
 
-        <div id="lending-fields" style="display:none; padding:16px; border:1px solid rgba(14, 165, 233, 0.4); background:rgba(14, 165, 233, 0.05); border-radius:16px; margin-bottom:12px;">
+        <div id="lending-fields" style="display:none; padding:16px; border:1px solid rgba(0, 79, 152, 0.4); background:rgba(0, 79, 152, 0.05); border-radius:12px; margin-bottom:12px;">
            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
               <div>
                 <label style="font-size:10px; font-weight:800; color:var(--neon-blue);">TIỀN VAY (TỶ)</label>
@@ -408,8 +408,8 @@
         <button class="ai-btn" id="btn-submit-diary" style="width:100%; margin-top:16px;" onclick="submitDiary()">BẮT ĐẦU ĐỒNG BỘ 🚀</button>
       </div>
 
-      <div id="ai-feedback-box" class="card glass" style="display:none; border-color:var(--neon-green); background:rgba(34, 197, 94, 0.05);">
-         <div style="font-size:11px; font-weight:800; color:var(--neon-green); margin-bottom:6px;">✨ AI COACHING:</div>
+      <div id="ai-feedback-box" class="card" style="display:none; border-color:var(--success); background:rgba(16, 185, 129, 0.05);">
+         <div style="font-size:11px; font-weight:800; color:var(--success); margin-bottom:6px;">✨ AI COACHING:</div>
          <p id="ai-feedback-text" style="font-size:13px; line-height:1.5;"></p>
          <button class="pill" style="margin-top:10px; width:100%;" onclick="useAiFeedback()">💬 Dùng kịch bản này</button>
       </div>
@@ -441,7 +441,7 @@
     <!-- 📅 ROADMAP 90 DAYS -->
     <div class="page" id="page-roadmap">
       <div class="page-header">
-        <h2 class="page-title" style="color:var(--neon-orange);">📅 Roadmap Marketing 90 Ngày</h2>
+        <h2 class="page-title" style="color:var(--vib-blue);">📅 Lộ trình Marketing chuẩn</h2>
         <p class="page-desc">Hành trình xây dựng thương hiệu RM triệu đô.</p>
       </div>
 

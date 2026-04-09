@@ -1,11 +1,11 @@
 {
-  "name": "RM Sales Hub – VIB",
-  "short_name": "RM Hub",
-  "description": "Công cụ bán hàng cho RM tín dụng",
+  "name": "VIB Sales Hub Professional",
+  "short_name": "VIB Hub",
+  "description": "Công cụ quản trị Pipeline & Bán hàng RM Tín dụng",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0a0c10",
-  "theme_color": "#0a0c10",
+  "background_color": "#ffffff",
+  "theme_color": "#004f98",
   "orientation": "portrait",
   "icons": [
     {

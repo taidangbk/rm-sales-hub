@@ -95,7 +95,7 @@ function saveIdentity() {
   document.getElementById('identity-modal').style.animation = 'fadeOut 0.3s forwards';
   setTimeout(() => {
     checkIdentity();
-    showToast(`Chào mừng ${finalName}! Mở bát thành công 🚀`);
+    showToast(`Chào mừng ${finalName}! Chúc bạn ngày mới hiệu quả 🚀`);
   }, 300);
 }
 
@@ -166,13 +166,13 @@ function renderHallOfFame() {
   const king = sorted[0];
 
   container.innerHTML = `
-    <div class="fame-card glass">
+    <div class="fame-card">
       <div class="fame-row">
-        <div class="fame-king">👑</div>
+        <div class="fame-king">🏆</div>
         <div>
-          <div style="font-size:10px; font-weight:800; color:var(--text-dim); text-transform:uppercase;">Vua Hoạt Động</div>
+          <div style="font-size:10px; font-weight:800; color:var(--vib-blue); text-transform:uppercase;">RM Xuất sắc nhất ngày</div>
           <div class="fame-name">${king.n.toUpperCase()}</div>
-          <div style="font-size:11px; color:var(--text-bright); font-weight:700;">🔥 ${king.c} Tương tác | Team ${king.sm}</div>
+          <div style="font-size:11px; color:var(--text-dim); font-weight:700;">Đã ghi nhận ${king.c} tương tác | Team ${king.sm}</div>
         </div>
       </div>
     </div>
@@ -313,7 +313,7 @@ async function submitDiary() {
 
   try {
     await fetch(WEBHOOK_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-    showToast('🚀 Báo cáo thành công! Top 1 vẫy gọi!');
+    showToast('🚀 Đã đồng bộ báo cáo lên hệ thống!');
     btn.innerHTML = '✅ ĐÃ GỬI XONG';
     fetchGlobalData();
     processAiCoaching(desc, payload["Phân loại"]);
